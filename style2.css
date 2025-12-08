@@ -11,7 +11,8 @@
     .header {
     min-height: 100vh;
     width: 100%;
-    background-image: linear-gradient(rgba(53, 59, 80, 0.7), rgba(53, 59, 80, 0.7)), url(Will-home-img/home-bckgrd.jpg);
+    /* background-image: linear-gradient(rgba(53, 59, 80, 0.7), rgba(53, 59, 80, 0.7)), url(Will-home-img/home-bckgrd.jpg); */
+    background-image: linear-gradient(rgba(53, 59, 80, 0.7), rgba(53, 59, 80, 0.7)), url(Will-home-img/Wireless-home.png);
     background-position: center;
     background-size: cover;
     position: relative;
@@ -20,7 +21,7 @@
 .headerother {
     min-height: 25vh;
     width: 100%;
-    background-image: linear-gradient(rgba(53, 59, 80, 0.7), rgba(53, 59, 80, 0.7)), url(Will-home-img/home-bckgrd.jpg);
+    background-image: linear-gradient(rgba(53, 59, 80, 0.7), rgba(53, 59, 80, 0.7)), url(Will-home-img/Wireless-home.png);
     background-position: center;
     background-size: cover;
     position: relative;
