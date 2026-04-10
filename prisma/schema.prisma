@@ -1,0 +1,131 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String              @id @default(cuid())
+  name              String
+  email             String              @unique
+  password          String
+  role              Role                @default(MEMBER)
+  position          String?
+  degree            String?
+  joinYear          Int?
+  bio               String?
+  profileImage      String?
+  phone             String?
+  linkedin          String?
+  googleScholar     String?
+  researchInterests String?
+  publications      Publication[]
+  projects          Project[]
+  news              News[]
+  galleryItems      GalleryItem[]
+  resources         Resource[]
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+}
+
+enum Role {
+  SUPERVISOR
+  MEMBER
+}
+
+model Publication {
+  id        String   @id @default(cuid())
+  title     String
+  authors   String
+  venue     String
+  year      Int
+  type      PubType  @default(CONFERENCE)
+  doi       String?
+  link      String?
+  abstract  String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+enum PubType {
+  JOURNAL
+  CONFERENCE
+  PREPRINT
+  BOOK_CHAPTER
+}
+
+model Project {
+  id          String        @id @default(cuid())
+  title       String
+  description String
+  status      ProjectStatus @default(ONGOING)
+  fundingBody String?
+  amount      String?
+  startYear   Int?
+  endYear     Int?
+  userId      String
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime      @default(now())
+}
+
+enum ProjectStatus {
+  ONGOING
+  COMPLETED
+  UPCOMING
+}
+
+model News {
+  id        String   @id @default(cuid())
+  content   String
+  date      String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+model GalleryItem {
+  id        String   @id @default(cuid())
+  imageUrl  String
+  caption   String?
+  category  String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+model Alumni {
+  id              String   @id @default(cuid())
+  name            String
+  degree          String
+  yearStart       Int?
+  yearEnd         Int?
+  currentPosition String?
+  email           String?
+  imageUrl        String?
+  createdAt       DateTime @default(now())
+}
+
+model ContactSubmission {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Resource {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  fileUrl     String?
+  category    String?
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+}
